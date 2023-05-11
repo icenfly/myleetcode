@@ -19,13 +19,34 @@
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        queue<int> q;
         vector<vector<int>> a;
-        bfs(root);
+        if(root == nullptr){
+            return a;
+        }
+        bfs(root,a);
         return a;
     }
-    void bfs(TreeNode* root){
-        
+    void bfs(TreeNode* root,vector<vector<int>> &a){
+        vector<int> layer;
+        queue<TreeNode*> q;
+
+        q.push(root);
+        q.push(nullptr);
+
+        while(!q.empty()){
+            TreeNode* t = q.front();
+            q.pop();
+            if(t!=nullptr){
+                layer.push_back(t->val);
+                if(t->left) q.push(t->left);
+                if(t->right) q.push(t->right);
+            }
+            else{
+                a.push_back(layer);
+                layer.resize(0);
+                if(q.size()>0) q.push(nullptr);
+            }
+        }
     }
 };
 // @lc code=end
