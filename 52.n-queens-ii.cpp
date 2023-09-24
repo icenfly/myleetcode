@@ -1,14 +1,14 @@
 /*
- * @lc app=leetcode id=51 lang=cpp
+ * @lc app=leetcode id=52 lang=cpp
  *
- * [51] N-Queens
+ * [52] N-Queens II
  */
 
 // @lc code=start
 class Solution {
 public:
-    vector<vector<string>> ans;
-    vector<vector<string>> solveNQueens(int n) {
+    int ans = 0;
+    int totalNQueens(int n) {
         vector<string> board(n, string(n,'.'));
         dfs(n,0,board);
         return ans;
@@ -37,7 +37,7 @@ public:
 
     void dfs(int n, int queens, vector<string> &board){
         if(queens == n){
-            ans.push_back(board);
+            ans++;
             return;
         }
         for(int i = 0; i <= n-1; i++){
